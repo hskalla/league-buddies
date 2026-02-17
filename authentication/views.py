@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -36,18 +38,26 @@ def logout(request):
     auth_logout(request)
     return redirect('login')
 
+# TODO: finish register view
 def register(request):
     if request.method == 'POST':
         # Get credentials from the form (e.g., request.POST['username'], request.POST['password'])
         username = request.POST.get('username')
         password = request.POST.get('password')
-        return HttpResponse("hello")
+        # Check if username is unique. If not, catch the error and return to sign-up
+        try:
+            User.objects.create_user(username=username,password=password)
+            return redirect('login')
+        except IntegrityError:
+            return redirect('register')
     else:
         # Render the registration form
         return render(request, 'authentication/register.html')
 
+# TODO: add password change view
 def password_change(request):
     return HttpResponse("password change")
 
+# TODO: add password change confirm view
 def password_change_confirm(request):
     return HttpResponse("password change confirm")

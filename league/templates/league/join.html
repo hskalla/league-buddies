@@ -1,0 +1,5 @@
+<p>You're joining <b>{{league.name}}</b>.</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+</form>

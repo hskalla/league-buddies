@@ -20,3 +20,11 @@ def league(request, slug):
 @login_required
 def join(request, slug):
     l = get_object_or_404(League, slug=slug)
+    if request.method == 'POST':
+        # Add user to the league if they confirm
+        user = request.user
+        l.users.add(user)
+        return redirect('league',slug=slug)
+    else:
+        # Render the registration form
+        return render(request, "league/join.html", {"league": l})
