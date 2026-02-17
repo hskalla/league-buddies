@@ -27,12 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Login config
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/league/" # A default redirect URL if 'next' is not present
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 # Application definition
 
 INSTALLED_APPS = [
-    'display',
-    'user_profile',
+    'league',
+    'authentication',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

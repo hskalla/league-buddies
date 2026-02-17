@@ -1,0 +1,19 @@
+<h1>{{ league.name }}</h1>
+<p>Users:</p>
+<ul>
+    {% for user in league.users.all %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+</ul>
+<p>Games:</p>
+<ul>
+    {% for game in league.games.all %}
+        <li>
+            {% if game.win %}
+                {{ game.agent }} won a game against {{ game.patient }}.
+            {% else %}
+                {{ game.patient }} won a game against {{ game.agent }}.
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
