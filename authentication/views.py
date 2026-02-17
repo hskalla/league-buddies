@@ -36,6 +36,16 @@ def logout(request):
     auth_logout(request)
     return redirect('login')
 
+def register(request):
+    if request.method == 'POST':
+        # Get credentials from the form (e.g., request.POST['username'], request.POST['password'])
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        return HttpResponse("hello")
+    else:
+        # Render the registration form
+        return render(request, 'authentication/register.html')
+
 def password_change(request):
     return HttpResponse("password change")
 
