@@ -1,0 +1,17 @@
+<h3>Log game:</h3>
+<form method="POST">  
+    {% csrf_token %}
+    <label for="id_opponent">Opponent:</label>
+    <select name="opponent" id="id_opponent" required>
+        {% for u in league.users.all %}
+            {% if u.id != user.id %}
+                <option value="{{ u }}">{{ u.username }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <br/>
+    <label for="id_win">Did you win the game?</label>
+    <input type="checkbox" id="id_win" name="win" value="win">
+    <br/>
+    <button type="submit", name="log_game_submit">Submit</button>
+</form>

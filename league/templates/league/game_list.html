@@ -1,0 +1,30 @@
+<p>Games:</p>
+<ul>
+    {% for game in league.games.all %}
+        <li>
+            {% if game.win %}
+                {{ game.agent }} won a game against {{ game.patient }}.
+            {% else %}
+                {{ game.patient }} won a game against {{ game.agent }}.
+            {% endif %}
+            {% if not game.confirmed %}
+                (Unconfirmed.)
+                {% if game.patient.id == user.id %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="game" value="{{ game.id }}">
+                        <button type="submit" name="confirm_game_submit" value="confirm">Confirm</button>
+                        <button type="submit" name="confirm_game_submit" value="discard">Discard</button>
+                    </form>
+                {% endif %}
+                {% if game.agent.id == user.id %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="game" value="{{ game.id }}">
+                        <button type="submit" name="confirm_game_submit" value="discard">Discard</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

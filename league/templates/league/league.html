@@ -5,15 +5,6 @@
         <li>{{ user.username }}</li>
     {% endfor %}
 </ul>
-<p>Games:</p>
-<ul>
-    {% for game in league.games.all %}
-        <li>
-            {% if game.win %}
-                {{ game.agent }} won a game against {{ game.patient }}.
-            {% else %}
-                {{ game.patient }} won a game against {{ game.agent }}.
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+{% include "league/game_list.html" with league=league user=user %}
+<p></p>
+{% include "league/log_game.html" with league=league user=user %}
