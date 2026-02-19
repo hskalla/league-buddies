@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.conf import settings
+from django.db.models import Q
 
 from .models import League, Game
 from django.contrib.auth.models import User
@@ -17,6 +18,7 @@ def index(request):
 def league(request, slug):
     l = get_object_or_404(League, slug=slug)
     u = request.user
+    e = []
     # parse form submission
     if request.method == "POST":
         if 'log_game_submit' in request.POST:
@@ -29,6 +31,15 @@ def league(request, slug):
             # print(game_agent," (",type(game_agent),") ",game_patient," (",type(game_patient),") ",game_win, " (",type(game_win),")")
             game = Game(agent=game_agent,patient=game_patient,league=l,win=game_win)
             game.save()
+        elif 'log_pack_submit' in request.POST:
+            number_of_games = len(l.games.filter(confirmed=True).filter(Q(agent=u) | Q(patient=u)))
+            number_of_packs = u.profiles.get(league=l).packs_claimed
+            if number_of_games - 4 * number_of_packs >= 4:
+                profile = u.profiles.get(league=l)
+                profile.packs_claimed = number_of_packs + 1
+                profile.save()
+            else:
+                e.append("pack_amount_error")
         elif 'confirm_game_submit' in request.POST:
             game = Game.objects.get(id=request.POST.get("game"))
             # print(request.POST.get("game")," (",type(request.POST.get("game")),") ",request.POST.get("confirm_game_submit")," (",type(request.POST.get("confirm_game_submit")),")")
@@ -37,7 +48,7 @@ def league(request, slug):
                 game.save()
             else:
                 game.delete()
-    return render(request, "league/league.html", {"league": l, "user": u})
+    return render(request, "league/league.html", {"league": l, "user": u, "error": e})
 
 @login_required
 def join(request, slug):

@@ -5,6 +5,8 @@
         <li>{{ user.username }}</li>
     {% endfor %}
 </ul>
-{% include "league/game_list.html" with league=league user=user %}
+{% include "league/game_list.html" with league=league user=user error=error %}
 <p></p>
-{% include "league/log_game.html" with league=league user=user %}
+{% include "league/log_game.html" with league=league user=user error=error %}
+<p></p>
+{% include "league/log_pack.html" with league=league user=user error=error %}
