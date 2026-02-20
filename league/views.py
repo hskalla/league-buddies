@@ -8,11 +8,8 @@ from django.db.models import Q
 from .models import League, Game
 from django.contrib.auth.models import User
 
-def index(request):
-    if request.user.is_authenticated:
-        return HttpResponse("You're an authenticated user! You're at the league index.")
-    else:
-        return HttpResponse("You're not authenticated. You're at the league index.")
+def home(request):
+    return render(request, "league/home.html")
 
 @login_required
 def league(request, slug):

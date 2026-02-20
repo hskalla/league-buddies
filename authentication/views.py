@@ -26,7 +26,7 @@ def login(request):
             if next_page:
                 return redirect(next_page)
             else:
-                return redirect('index')
+                return redirect('home')
         else:
             # Provide an error message
             return HttpResponse("Invalid login details")

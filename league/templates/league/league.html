@@ -1,3 +1,7 @@
+{% extends "./league_base.html" %}
+
+{% block content %}
+
 <h1>{{ league.name }}</h1>
 <p>Users:</p>
 <ul>
@@ -10,3 +14,5 @@
 {% include "league/log_game.html" with league=league user=user error=error %}
 <p></p>
 {% include "league/log_pack.html" with league=league user=user error=error %}
+
+{% endblock %}

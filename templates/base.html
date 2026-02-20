@@ -1,0 +1,22 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>League Buddies</title>
+</head>
+
+<body>
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        Created by Henry Skalla, 2026.
+    </footer>
+</body>
+</html>

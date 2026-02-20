@@ -1,0 +1,20 @@
+{% extends "./league_base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.profiles.all %}
+        <p>You're a member of the following leagues:</p>
+        <ul>
+            {% for profile in user.profiles.all %}
+                <li><a href="{{ profile.league.slug }}">{{ profile.league.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> You're not a member of any league. :( </p>
+    {% endif %}
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to view your leagues.</p>
+{% endif %}
+
+{% endblock %}

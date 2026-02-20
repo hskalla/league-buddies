@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+    <div class="header-left">
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+    <div class="header-right">
+        {% if user.is_authenticated %}
+            Logged in as {{ user.username }}.
+            <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+        {% endif %}
+    </div>
+{% endblock %}
