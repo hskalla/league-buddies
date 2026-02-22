@@ -1,18 +1,27 @@
 {% extends "./league_base.html" %}
 
 {% block content %}
-
-<h1>{{ league.name }}</h1>
-<p>Users:</p>
-<ul>
-    {% for user in league.users.all %}
-        <li>{{ user.username }}</li>
-    {% endfor %}
-</ul>
-{% include "league/game_list.html" with league=league user=user error=error %}
-<p></p>
-{% include "league/log_game.html" with league=league user=user error=error %}
-<p></p>
-{% include "league/log_pack.html" with league=league user=user error=error %}
-
+    <div class="league_content">
+        <h1>{{ league.name }}</h1>
+        <p class="description"> Description... {% lorem %} </p>
+        <div class="panel_frame" style:"display:flex; justify-content:space-between;">
+            <div class="panel">
+                {% include "league/log_game.html" with league=league user=user error=error %}
+            </div>
+            <div class="panel">
+                {% include "league/log_pack.html" with league=league user=user error=error %}
+            </div>
+        </div>
+        <p>Users:</p>
+        <ul>
+            {% for user in league.users.all %}
+                <li>{{ user.username }}</li>
+            {% endfor %}
+        </ul>
+        {% include "league/game_list.html" with league=league user=user error=error %}
+        <p></p>
+        {% include "league/log_game.html" with league=league user=user error=error %}
+        <p></p>
+        {% include "league/log_pack.html" with league=league user=user error=error %}
+    </div>
 {% endblock %}

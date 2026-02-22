@@ -5,6 +5,67 @@
 header {
     display: flex;
     justify-content:space-between;
+    margin: 0; /* Removes default margins on all sides */
+    padding: 8px; /* Also common to remove default padding */
+    background-color: blue;
+    color:white;
+
+    a {
+        color:white;
+    }
+}
+
+a {
+    color:blue;
+}
+
+.league_content {
+    text-align: left;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    h1 {
+        text-align:center;
+        font-size: 2.2em; 
+        padding: 0px;
+        margin: 5px;
+    }
+
+    .panel_frame {
+        display:flex;
+        justify-content:space-between;
+
+        .panel {
+            padding:10px;
+            width: 44.5%;
+            text-align:left;
+
+            h3 {
+                text-align:center;
+                margin-top:0px;
+                margin-bottom:4px;
+            }
+
+            form {
+                margin-bottom:10px;
+                margin-top:10px;
+                line-height:1.8;
+            }
+
+            button {
+                margin:0 auto;
+                margin-top:10px;
+                display:block;
+                background-color: white;
+                border:0px;
+            }
+
+            button:hover {
+                background-color: black;
+                color:white;
+            }
+        }
+    }
 }
 
 .header-left {
@@ -19,4 +80,13 @@ footer {
     text-align: center;
     color: darkgray;
     font-size: small;
+}
+
+#content {
+    padding: 8px;
+}
+
+body {
+    margin: 0; /* Removes default margins on all sides */
+    padding: 0; /* Also common to remove default padding */
 }

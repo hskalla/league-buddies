@@ -1,9 +1,13 @@
 <h3>Log pack:</h3>
+<p>
+    3 / 4
+</p>
 {% if "pack_amount_error" in error %}
-    <p>
-        You don't have enough games logged to claim a pack!
-    </p>
+        You don't have enough games!
+{% else %}
+    <br/>
 {% endif %}
+
 <form method="POST">
     {% csrf_token %}
     <button type="submit", name="log_pack_submit">Claimed a pack</button>
