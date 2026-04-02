@@ -1,1 +1,6 @@
+# PYTHON
 __pycache__/
+**/__pycache__/
+
+# MACOS
+.DS_Store
